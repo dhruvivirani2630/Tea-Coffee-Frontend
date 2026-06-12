@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Loader from "../../components/common/Loader";
+import { ROLES, STATUS } from "../../constants/roles";
 import { fetchUsers } from "../../store/slices/usersSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
@@ -14,8 +15,8 @@ const AdminDashboard = () => {
 
   if (loading) return <Loader label="Loading admin dashboard" />;
 
-  const active = users.filter((user) => user.status === "Active").length;
-  const admins = users.filter((user) => user.role === "Admin").length;
+  const active = users.filter((user) => user.status === STATUS.ACTIVE).length;
+  const admins = users.filter((user) => user.role === ROLES.ADMIN).length;
 
   return (
     <section>

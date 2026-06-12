@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import { ROLES } from "../../constants/roles";
 import { formatDate } from "../../utils/date";
 import { useAppSelector } from "../../store/hooks";
 
 const UserDashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const isAdmin = user?.role === "Admin";
+  const isAdmin = user?.role === ROLES.ADMIN;
 
   return (
     <section>

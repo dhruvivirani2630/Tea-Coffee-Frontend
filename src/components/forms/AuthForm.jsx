@@ -25,8 +25,22 @@ const AuthForm = ({
             error={errors.employeeId}
             onChange={onChange}
           />
-          <Field label="Email" name="email" value={values.email} error={errors.email} onChange={onChange} />
-          <Field label="Phone Number" name="phone" value={values.phone} error={errors.phone} onChange={onChange} />
+          <Field
+            label="Email"
+            name="email"
+            value={values.email}
+            error={errors.email}
+            hint="Required if phone is not provided."
+            onChange={onChange}
+          />
+          <Field
+            label="Phone Number"
+            name="phone"
+            value={values.phone}
+            error={errors.phone}
+            hint="Required if email is not provided."
+            onChange={onChange}
+          />
         </>
       )}
 
@@ -62,7 +76,16 @@ const AuthForm = ({
   );
 };
 
-export const Field = ({ label, name, value, error, onChange, type = "text", disabled = false }) => (
+export const Field = ({
+  label,
+  name,
+  value,
+  error,
+  hint,
+  onChange,
+  type = "text",
+  disabled = false,
+}) => (
   <label className="field">
     <span>{label}</span>
     <input
@@ -73,6 +96,7 @@ export const Field = ({ label, name, value, error, onChange, type = "text", disa
       onChange={(event) => onChange(name, event.target.value)}
       aria-invalid={Boolean(error)}
     />
+    {hint && !error && <small className="hint">{hint}</small>}
     {error && <small>{error}</small>}
   </label>
 );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/forms/AuthForm";
+import { ROLES } from "../../constants/roles";
 import { loginUser } from "../../store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
@@ -13,7 +14,9 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
 
-  if (user) return <Navigate to={user.role === "Admin" ? "/admin" : "/dashboard"} replace />;
+  if (user) {
+    return <Navigate to={user.role === ROLES.ADMIN ? "/admin" : "/dashboard"} replace />;
+  }
 
   const onChange = (name, value) => {
     setValues((current) => ({ ...current, [name]: value }));
@@ -25,8 +28,9 @@ const LoginPage = () => {
     event.preventDefault();
     setMessage("");
     try {
-      await dispatch(loginUser(values)).unwrap();
-      navigate(location.state?.from?.pathname || "/dashboard", { replace: true });
+      const result = await dispatch(loginUser(values)).unwrap();
+      const fallback = result.user.role === ROLES.ADMIN ? "/admin" : "/dashboard";
+      navigate(location.state?.from?.pathname || fallback, { replace: true });
     } catch (err) {
       setErrors(err?.errors || {});
       setMessage(err?.message || "Unable to login.");
@@ -37,7 +41,7 @@ const LoginPage = () => {
     <main className="auth-page">
       <section className="auth-card">
         <h1>Login</h1>
-        <p>Use admin@company.com / Admin@123 or user@company.com / User@1234.</p>
+        <p>Sign in with your email or phone number and password.</p>
         <AuthForm
           mode="login"
           values={values}

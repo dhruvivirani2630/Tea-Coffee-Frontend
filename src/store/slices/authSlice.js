@@ -29,7 +29,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const signupUser = createAsyncThunk(
-  "auth/signupUser",
+  "auth/register",
   async (payload, { rejectWithValue }) => {
     try {
       return await authService.signup(payload);

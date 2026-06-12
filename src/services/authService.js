@@ -1,94 +1,123 @@
 import axiosClient from "../api/axiosClient";
-import { ROLES, STATUS } from "../constants/roles";
+import { STATUS } from "../constants/roles";
 import { STORAGE_KEYS } from "../constants/storageKeys";
-import { nowIso } from "../utils/date";
 import {
   createToken,
   getUsersFromStorage,
   parseToken,
   sanitizeUser,
-  saveUsersToStorage,
 } from "../utils/mockDb";
-import { isEmailOrPhone, validateAuth } from "../utils/validators";
+import { clearSession } from "../utils/session";
+import { validateLogin } from "../utils/validators";
 
 const delay = (value) => new Promise((resolve) => setTimeout(() => resolve(value), 250));
 
+const getSafeSignupLogPayload = (payload) => ({
+  fullName: payload.fullName,
+  employeeId: payload.employeeId,
+  email: payload.email,
+  phone: payload.phone,
+});
+
+const getRegisterPayload = (payload) => ({
+  name: payload.fullName?.trim(),
+  employeeId: payload.employeeId?.trim(),
+  email: payload.email?.trim(),
+  phone: payload.phone?.trim(),
+  password: payload.password,
+});
+
+const normalizeRegisteredUser = (user, fallback) => ({
+  ...user,
+  fullName: user?.fullName || user?.name || fallback.name,
+  employeeId: user?.employeeId || fallback.employeeId,
+  email: user?.email || fallback.email,
+  phone: user?.phone || fallback.phone,
+});
+
 export const authService = {
   async signup(payload) {
-    await axiosClient.request({ url: "/auth/signup", method: "POST", data: payload });
-    const users = getUsersFromStorage();
-    const errors = validateAuth(payload, users);
+    const registerPayload = getRegisterPayload(payload);
+    console.log("[Auth] Register started", getSafeSignupLogPayload(payload));
+    console.log("[Auth] Register API payload", {
+      name: registerPayload.name,
+      employeeId: registerPayload.employeeId,
+      email: registerPayload.email,
+      phone: registerPayload.phone,
+    });
 
-    if (Object.keys(errors).length) {
-      throw { message: "Please fix the highlighted fields.", errors };
+    try {
+      const response = await axiosClient.post("api/auth/register", registerPayload);
+      const responseData = response.data?.data || response.data || {};
+      const token = responseData.token;
+      const user = normalizeRegisteredUser(responseData.user || responseData, registerPayload);
+
+      if (token) localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+      if (user.id) localStorage.setItem(STORAGE_KEYS.CURRENT_USER_ID, user.id);
+
+      console.log("[Auth] Register succeeded", user);
+      return delay({ token, user });
+    } catch (error) {
+      console.log("[Auth] Register failed", error);
+      throw error;
     }
-
-    const existingIdentity = users.find(
-      (user) =>
-        user.email.toLowerCase() === payload.email.trim().toLowerCase() ||
-        user.phone === payload.phone.trim(),
-    );
-    if (existingIdentity) {
-      throw { message: "Email or phone number is already registered." };
-    }
-
-    const timestamp = nowIso();
-    const user = {
-      id: crypto.randomUUID(),
-      fullName: payload.fullName.trim(),
-      employeeId: payload.employeeId.trim(),
-      email: payload.email.trim().toLowerCase(),
-      phone: payload.phone.trim(),
-      role: ROLES.USER,
-      status: STATUS.ACTIVE,
-      createdDate: timestamp,
-      updatedDate: timestamp,
-      password: payload.password,
-    };
-
-    saveUsersToStorage([...users, user]);
-    const token = createToken(user);
-    localStorage.setItem(STORAGE_KEYS.TOKEN, token);
-    localStorage.setItem(STORAGE_KEYS.CURRENT_USER_ID, user.id);
-    return delay({ token, user: sanitizeUser(user) });
   },
 
   async login({ identifier, password }) {
-    await axiosClient.request({ url: "/auth/login", method: "POST", data: { identifier } });
-    if (!isEmailOrPhone(identifier || "")) {
-      throw { message: "Enter a valid email address or phone number." };
+    console.log("[Auth] Login started", { identifier });
+
+    try {
+      await axiosClient.request({ url: "/auth/login", method: "POST", data: { identifier } });
+      const errors = validateLogin({ identifier, password });
+      if (Object.keys(errors).length) {
+        throw { message: "Please fix the highlighted fields.", errors };
+      }
+
+      const users = getUsersFromStorage();
+      const normalized = identifier.trim().toLowerCase();
+      const trimmedPhone = identifier.trim();
+      const user = users.find(
+        (item) =>
+          (item.email.toLowerCase() === normalized || item.phone === trimmedPhone) &&
+          item.password === password,
+      );
+
+      if (!user) throw { message: "Invalid credentials." };
+      if (user.status !== STATUS.ACTIVE) throw { message: "Your account is inactive." };
+
+      const token = createToken(user);
+      const sanitizedUser = sanitizeUser(user);
+      localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+      localStorage.setItem(STORAGE_KEYS.CURRENT_USER_ID, user.id);
+      console.log("[Auth] Login succeeded", sanitizedUser);
+      return delay({ token, user: sanitizedUser });
+    } catch (error) {
+      console.log("[Auth] Login failed", error);
+      throw error;
     }
-
-    const users = getUsersFromStorage();
-    const normalized = identifier.trim().toLowerCase();
-    const user = users.find(
-      (item) =>
-        (item.email.toLowerCase() === normalized || item.phone === identifier.trim()) &&
-        item.password === password,
-    );
-
-    if (!user) throw { message: "Invalid credentials." };
-    if (user.status !== STATUS.ACTIVE) throw { message: "Your account is inactive." };
-
-    const token = createToken(user);
-    localStorage.setItem(STORAGE_KEYS.TOKEN, token);
-    localStorage.setItem(STORAGE_KEYS.CURRENT_USER_ID, user.id);
-    return delay({ token, user: sanitizeUser(user) });
   },
 
   async logout() {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
-    localStorage.removeItem(STORAGE_KEYS.CURRENT_USER_ID);
+    await axiosClient.post("/auth/logout").catch(() => undefined);
+    clearSession();
     return delay({ success: true });
   },
 
   async getSession() {
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
     const payload = token ? parseToken(token) : null;
-    if (!payload) return null;
+    if (!payload) {
+      clearSession();
+      return null;
+    }
 
     const user = getUsersFromStorage().find((item) => item.id === payload.userId);
-    return user ? delay({ token, user: sanitizeUser(user) }) : null;
+    if (!user) {
+      clearSession();
+      return null;
+    }
+
+    return delay({ token, user: sanitizeUser(user) });
   },
 };
 

@@ -33,8 +33,8 @@ export const userService = {
             ...user,
             fullName: profile.fullName.trim(),
             employeeId: profile.employeeId.trim(),
-            email: profile.email.trim().toLowerCase(),
-            phone: profile.phone.trim(),
+            email: profile.email?.trim().toLowerCase() || "",
+            phone: profile.phone?.trim() || "",
           })
         : user,
     );
@@ -83,8 +83,8 @@ export const userService = {
         ...user,
         fullName: updates.fullName.trim(),
         employeeId: updates.employeeId.trim(),
-        email: updates.email.trim().toLowerCase(),
-        phone: updates.phone.trim(),
+        email: updates.email?.trim().toLowerCase() || "",
+        phone: updates.phone?.trim() || "",
         role,
         status: updates.status || user.status,
       });
