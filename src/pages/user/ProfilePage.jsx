@@ -15,7 +15,7 @@ const ProfilePage = () => {
         <Link className="button primary" to="/profile/edit">Edit profile</Link>
       </div>
       <div className="panel detail-grid">
-        <Detail label="Full Name" value={user.fullName} />
+        <Detail label="Full Name" value={user.name} />
         <Detail label="Employee ID" value={user.employeeId} />
         <Detail label="Email" value={user.email} />
         <Detail label="Phone Number" value={user.phone} />

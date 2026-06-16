@@ -13,7 +13,7 @@ const ProfileForm = ({
 }) => (
   <form className="panel form-grid" onSubmit={onSubmit} noValidate>
     {success && <div className="alert success">{success}</div>}
-    <Field label="Full Name" name="fullName" value={values.fullName} error={errors.fullName} onChange={onChange} />
+    <Field label="Full Name" name="name" value={values.name} error={errors.name} onChange={onChange} />
     <Field
       label="Employee ID"
       name="employeeId"
@@ -24,32 +24,15 @@ const ProfileForm = ({
     <Field label="Email" name="email" value={values.email} error={errors.email} onChange={onChange} />
     <Field label="Phone Number" name="phone" value={values.phone} error={errors.phone} onChange={onChange} />
 
-    {adminMode && (
-      <>
-        <label className="field">
-          <span>Role</span>
-          <select value={values.role} disabled={lockRole} onChange={(event) => onChange("role", event.target.value)}>
-            <option value={ROLES.USER}>User</option>
-            <option value={ROLES.ADMIN}>Admin</option>
-          </select>
-        </label>
-        <label className="field">
-          <span>Status</span>
-          <select value={values.status} onChange={(event) => onChange("status", event.target.value)}>
-            <option value={STATUS.ACTIVE}>Active</option>
-            <option value={STATUS.INACTIVE}>Inactive</option>
-          </select>
-        </label>
-      </>
-    )}
+ <label className="field">
+  <span>Role</span>
+  <input value={values.role || ""} readOnly />
+</label>
 
-    {!adminMode && (
-      <label className="field">
-        <span>Role</span>
-        <input value={values.role || ""} disabled readOnly />
-      </label>
-    )}
-
+<label className="field">
+  <span>Status</span>
+  <input value={values.status || ""} readOnly />
+</label>
     <button className="button primary" type="submit" disabled={loading}>
       {loading ? "Saving..." : "Save changes"}
     </button>

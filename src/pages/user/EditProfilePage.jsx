@@ -9,6 +9,7 @@ const EditProfilePage = () => {
   const loading = useAppSelector((state) => state.auth.status === "loading");
   if (!user) return <Loader label="Loading profile" />;
 
+  console.log("EditProfilePage: user for form:", user);
   return <EditProfileForm key={user.id} initialValues={user} loading={loading} />;
 };
 

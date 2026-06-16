@@ -63,7 +63,7 @@ export const refreshCurrentUser = createAsyncThunk(
 );
 
 export const updateCurrentUserProfile = createAsyncThunk(
-  "auth/updateCurrentUserProfile",
+  "users/update-profile",
   async (profile, { rejectWithValue }) => {
     try {
       return await userService.updateProfile(profile);

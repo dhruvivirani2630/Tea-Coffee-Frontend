@@ -8,38 +8,113 @@ import {
   withUpdatedDate,
 } from "../utils/mockDb";
 import { validateProfileFields } from "../utils/validators";
+import { normalizeUserRecord, sanitizeUserRecord } from "../utils/userModel";
 
 const delay = (value) => new Promise((resolve) => setTimeout(() => resolve(value), 250));
+const PROFILE_ENDPOINT = "/profile";
+
+const getResponseUser = (response) => {
+  const data = response.data?.data || response.data || {};
+  return data.user || data.profile || data;
+};
+
+const getApiError = (error, fallback = "Something went wrong.") => {
+  const data = error?.response?.data || {};
+  return {
+    message: data.message || error?.message || fallback,
+    errors: data.errors || {},
+  };
+};
+
+const getProfilePayload = (profile) => {
+  const payload = {
+    name: profile.name?.trim() || "",
+    email: profile.email?.trim().toLowerCase() || "",
+    phone: profile.phone?.trim() || "",
+  };
+
+  if (profile.profileImage instanceof File) {
+    console.log("📸 Profile image is a file, preparing FormData",profile);
+    const formData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => formData.append(key, value));
+    formData.append("profileImage", profile.profileImage);
+    return formData;
+  }
+
+  if (profile.profileImage && typeof profile.profileImage === "string") {
+    payload.profileImage = profile.profileImage;
+  }
+
+  return payload;
+};
 
 export const userService = {
   async getProfile() {
-    await axiosClient.get("/profile");
+    try {
+      const response = await axiosClient.get(PROFILE_ENDPOINT);
+      const profile = getResponseUser(response);
+      if (profile?.id || profile?.email || profile?.employeeId) {
+        return sanitizeUserRecord(profile);
+      }
+    } catch (error) {
+      if (import.meta.env.VITE_USE_MOCK_API === "false") {
+        throw getApiError(error, "Unable to load profile.");
+      }
+    }
+
     const userId = localStorage.getItem(STORAGE_KEYS.CURRENT_USER_ID);
     const user = getUsersFromStorage().find((item) => item.id === userId);
     if (!user) throw { message: "Profile not found." };
-    return delay(sanitizeUser(user));
+    return delay(sanitizeUserRecord(user));
   },
 
   async updateProfile(profile) {
-    await axiosClient.put("/profile", profile);
+    console.log("🔄 Starting updateProfile with:", profile);
+    const allowedProfile = getProfilePayload(profile);
+    console.log("📦 Profile payload prepared:", allowedProfile);
+
+    try {
+      const response = await axiosClient.put("api/users/update-profile", allowedProfile);
+      console.log("url: api/users/update-profile", "payload:", allowedProfile);
+      console.log("✅ API profile update response received:", response);
+      const updatedProfile = getResponseUser(response);
+      console.log("👤 Updated profile data:", updatedProfile);
+      if (updatedProfile?.id || updatedProfile?.email || updatedProfile?.employeeId) {
+        const sanitized = sanitizeUserRecord(updatedProfile);
+        console.log("✨ Profile updated successfully (sanitized):", sanitized);
+        return sanitized;
+      }
+    } catch (error) {
+      console.error("❌ Error updating profile from API:", error);
+      if (import.meta.env.VITE_USE_MOCK_API === "false") {
+        throw getApiError(error, "Unable to update profile.");
+      }
+    }
+
+    console.log("📚 Using mock data for profile update");
     const users = getUsersFromStorage();
     const userId = localStorage.getItem(STORAGE_KEYS.CURRENT_USER_ID);
-    const errors = validateProfileFields(profile, users, userId);
-    if (Object.keys(errors).length) throw { message: "Please fix the highlighted fields.", errors };
+    const errors = validateProfileFields({ ...profile, employeeId: profile.employeeId || "self" }, users, userId);
+    if (Object.keys(errors).length) {
+      console.error("⚠️ Validation errors:", errors);
+      throw { message: "Please fix the highlighted fields.", errors };
+    }
 
     const updated = users.map((user) =>
       user.id === userId
         ? withUpdatedDate({
             ...user,
             fullName: profile.fullName.trim(),
-            employeeId: profile.employeeId.trim(),
             email: profile.email?.trim().toLowerCase() || "",
             phone: profile.phone?.trim() || "",
+            profileImage: typeof profile.profileImage === "string" ? profile.profileImage : user.profileImage || "",
           })
         : user,
     );
     saveUsersToStorage(updated);
-    return delay(sanitizeUser(updated.find((user) => user.id === userId)));
+    const finalProfile = sanitizeUserRecord(updated.find((user) => user.id === userId));
+    console.log("💾 Mock profile updated and saved:", finalProfile);
+    return delay(finalProfile);
   },
 
   async getUsers({ search = "", role = "All", status = "All" } = {}) {
