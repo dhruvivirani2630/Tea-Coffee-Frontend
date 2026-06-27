@@ -1,0 +1,22 @@
+<testsuites id="" name="" tests="5" failures="0" skipped="0" errors="0" time="9.692574">
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T09:36:13.126Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.115" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="1.115">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T09:36:13.126Z" hostname="firefox" tests="1" failures="0" skipped="0" time="4.083" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="4.083">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T09:36:13.126Z" hostname="webkit" tests="1" failures="0" skipped="0" time="1.939" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="1.939">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T09:36:13.126Z" hostname="Mobile Chrome" tests="1" failures="0" skipped="0" time="1.153" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="1.153">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T09:36:13.126Z" hostname="Mobile Safari" tests="1" failures="0" skipped="0" time="1.313" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="1.313">
+</testcase>
+</testsuite>
+</testsuites>
