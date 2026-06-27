@@ -163,12 +163,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1623,
+                  "duration": 1560,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:38.571Z",
+                  "startTime": "2026-06-27T11:14:18.839Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -178,7 +178,7 @@
           ],
           "id": "badc1754af1944f68b2b-3a6e14a6cecf4266ff5d",
           "file": "login.spec.js",
-          "line": 9,
+          "line": 10,
           "column": 1
         },
         {
@@ -197,12 +197,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1403,
+                  "duration": 1503,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:38.489Z",
+                  "startTime": "2026-06-27T11:14:18.855Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -212,7 +212,7 @@
           ],
           "id": "badc1754af1944f68b2b-0a11ff96aaa5a5f86637",
           "file": "login.spec.js",
-          "line": 48,
+          "line": 27,
           "column": 1
         },
         {
@@ -229,14 +229,14 @@
               "results": [
                 {
                   "workerIndex": 4,
-                  "parallelIndex": 1,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 7039,
+                  "duration": 9973,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:41.404Z",
+                  "startTime": "2026-06-27T11:14:21.789Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -246,7 +246,7 @@
           ],
           "id": "badc1754af1944f68b2b-cb737048b2c6de3d41a9",
           "file": "login.spec.js",
-          "line": 9,
+          "line": 10,
           "column": 1
         },
         {
@@ -263,14 +263,14 @@
               "results": [
                 {
                   "workerIndex": 5,
-                  "parallelIndex": 2,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 12150,
+                  "duration": 11287,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:41.530Z",
+                  "startTime": "2026-06-27T11:14:21.976Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -280,7 +280,7 @@
           ],
           "id": "badc1754af1944f68b2b-39acb7665d2f167c757a",
           "file": "login.spec.js",
-          "line": 48,
+          "line": 27,
           "column": 1
         },
         {
@@ -296,15 +296,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 4661,
+                  "duration": 5420,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:59.298Z",
+                  "startTime": "2026-06-27T11:14:40.321Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -314,7 +314,7 @@
           ],
           "id": "badc1754af1944f68b2b-28f2f226bf967056ec6e",
           "file": "login.spec.js",
-          "line": 9,
+          "line": 10,
           "column": 1
         },
         {
@@ -330,15 +330,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 2,
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4772,
+                  "duration": 5242,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:59.602Z",
+                  "startTime": "2026-06-27T11:14:40.660Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -348,7 +348,7 @@
           ],
           "id": "badc1754af1944f68b2b-20020819c5f53f5a9876",
           "file": "login.spec.js",
-          "line": 48,
+          "line": 27,
           "column": 1
         },
         {
@@ -365,14 +365,14 @@
               "results": [
                 {
                   "workerIndex": 12,
-                  "parallelIndex": 1,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 2378,
+                  "duration": 1884,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:07.217Z",
+                  "startTime": "2026-06-27T11:14:46.941Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -382,7 +382,7 @@
           ],
           "id": "badc1754af1944f68b2b-742b6cc8fb1d49717c55",
           "file": "login.spec.js",
-          "line": 9,
+          "line": 10,
           "column": 1
         },
         {
@@ -399,14 +399,14 @@
               "results": [
                 {
                   "workerIndex": 13,
-                  "parallelIndex": 0,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 2343,
+                  "duration": 2363,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:07.268Z",
+                  "startTime": "2026-06-27T11:14:48.429Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -416,7 +416,7 @@
           ],
           "id": "badc1754af1944f68b2b-f3f5566a7cde6e448304",
           "file": "login.spec.js",
-          "line": 48,
+          "line": 27,
           "column": 1
         },
         {
@@ -433,14 +433,14 @@
               "results": [
                 {
                   "workerIndex": 16,
-                  "parallelIndex": 1,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 3767,
+                  "duration": 3678,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:12.593Z",
+                  "startTime": "2026-06-27T11:14:52.184Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -450,7 +450,7 @@
           ],
           "id": "badc1754af1944f68b2b-975c6eaca01d3ed0fa01",
           "file": "login.spec.js",
-          "line": 9,
+          "line": 10,
           "column": 1
         },
         {
@@ -469,12 +469,12 @@
                   "workerIndex": 17,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3998,
+                  "duration": 3855,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:12.669Z",
+                  "startTime": "2026-06-27T11:14:53.099Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -484,7 +484,7 @@
           ],
           "id": "badc1754af1944f68b2b-8f98766d72bc3a2e7e74",
           "file": "login.spec.js",
-          "line": 48,
+          "line": 27,
           "column": 1
         }
       ]
@@ -511,12 +511,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 1475,
+                  "duration": 1266,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:38.555Z",
+                  "startTime": "2026-06-27T11:14:18.806Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -545,12 +545,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 12207,
+                  "duration": 12577,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:41.610Z",
+                  "startTime": "2026-06-27T11:14:22.013Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -576,15 +576,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 10,
-                  "parallelIndex": 0,
+                  "workerIndex": 8,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 3437,
+                  "duration": 3967,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:00.835Z",
+                  "startTime": "2026-06-27T11:14:40.321Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -611,14 +611,14 @@
               "results": [
                 {
                   "workerIndex": 14,
-                  "parallelIndex": 2,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2160,
+                  "duration": 1949,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:07.302Z",
+                  "startTime": "2026-06-27T11:14:48.594Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -647,12 +647,12 @@
                   "workerIndex": 18,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 2590,
+                  "duration": 2795,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:12.704Z",
+                  "startTime": "2026-06-27T11:14:53.355Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -689,12 +689,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 1805,
+                  "duration": 1476,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:38.475Z",
+                  "startTime": "2026-06-27T11:14:18.839Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -704,7 +704,7 @@
           ],
           "id": "c7c115290b02b9676bce-a4a121fc420ff557bb02",
           "file": "register.spec.js",
-          "line": 3,
+          "line": 4,
           "column": 1
         },
         {
@@ -721,14 +721,14 @@
               "results": [
                 {
                   "workerIndex": 7,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 12981,
+                  "duration": 12157,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:50:41.732Z",
+                  "startTime": "2026-06-27T11:14:22.041Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -738,7 +738,7 @@
           ],
           "id": "c7c115290b02b9676bce-e6806e4939ff8e7ee67d",
           "file": "register.spec.js",
-          "line": 3,
+          "line": 4,
           "column": 1
         },
         {
@@ -755,14 +755,14 @@
               "results": [
                 {
                   "workerIndex": 11,
-                  "parallelIndex": 3,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5307,
+                  "duration": 5227,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:00.940Z",
+                  "startTime": "2026-06-27T11:14:41.085Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -772,7 +772,7 @@
           ],
           "id": "c7c115290b02b9676bce-6fac4cfbd44e1c679623",
           "file": "register.spec.js",
-          "line": 3,
+          "line": 4,
           "column": 1
         },
         {
@@ -789,14 +789,14 @@
               "results": [
                 {
                   "workerIndex": 15,
-                  "parallelIndex": 3,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1746,
+                  "duration": 1821,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:09.922Z",
+                  "startTime": "2026-06-27T11:14:49.577Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -806,7 +806,7 @@
           ],
           "id": "c7c115290b02b9676bce-9e58734e43e4d274d3cf",
           "file": "register.spec.js",
-          "line": 3,
+          "line": 4,
           "column": 1
         },
         {
@@ -823,14 +823,14 @@
               "results": [
                 {
                   "workerIndex": 19,
-                  "parallelIndex": 3,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2610,
+                  "duration": 2895,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:51:15.327Z",
+                  "startTime": "2026-06-27T11:14:54.477Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -840,7 +840,7 @@
           ],
           "id": "c7c115290b02b9676bce-10c33bdf60fc9d505edb",
           "file": "register.spec.js",
-          "line": 3,
+          "line": 4,
           "column": 1
         }
       ]
@@ -848,8 +848,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-27T10:50:37.359Z",
-    "duration": 41042.269,
+    "startTime": "2026-06-27T11:14:17.569Z",
+    "duration": 40207.432,
     "expected": 20,
     "skipped": 0,
     "unexpected": 0,

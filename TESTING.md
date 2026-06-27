@@ -65,6 +65,21 @@ npm run e2e:debug
 npm run e2e:report
 ```
 
+### Auth API Test Setup
+
+The auth automation uses a small in-memory API mock in `tests/e2e/support/authApi.js`.
+
+- `POST /auth/register` creates a new user in the mock database and returns the created record
+- `POST /auth/login` validates the user against seeded users and newly registered users
+- `GET /auth/profile` returns a null session for fresh test runs
+- `GET /users` returns seeded users for the admin dashboard
+
+Run only the auth flows with:
+
+```bash
+npm run test:auth
+```
+
 ## Test Coverage
 
 Coverage thresholds are set to 50% across all metrics. View coverage reports:

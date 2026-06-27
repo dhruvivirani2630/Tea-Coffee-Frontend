@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { setupAuthApiMock } from "./support/authApi";
 
 const fillLoginForm = async (page, identifier, password) => {
   await page.goto("/login");
@@ -7,31 +8,9 @@ const fillLoginForm = async (page, identifier, password) => {
 };
 
 test("User can login and reach the dashboard", async ({ page }) => {
+  await setupAuthApiMock(page);
   const fullName = "Demo User";
   const email = "user@company.com";
-
-  await page.route("**/auth/login", async (route) => {
-    const body = route.request().postDataJSON();
-
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({
-        data: {
-          token: "mock-user-token",
-          user: {
-            id: "user-001",
-            fullName,
-            employeeId: "EMP001",
-            email: body.email || email,
-            role: "User",
-            status: "Active",
-            createdDate: new Date().toISOString(),
-          },
-        },
-      }),
-    });
-  });
 
   await fillLoginForm(page, email, "User@1234");
 
@@ -46,34 +25,11 @@ test("User can login and reach the dashboard", async ({ page }) => {
 });
 
 test("Admin can login and reach the admin dashboard", async ({ page }) => {
+  await setupAuthApiMock(page);
   const fullName = "Admin";
   const email = "admin@gmail.com";
 
-  await page.route("**/auth/login", async (route) => {
-    const body = route.request().postDataJSON();
-
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({
-        data: {
-          token: "mock-admin-token",
-          user: {
-            id: "admin-001",
-            fullName,
-            employeeId: "ADM001",
-            email: body.email || email,
-            password: body.password,
-            role: "Admin",
-            status: "Active",
-            createdDate: new Date().toISOString(),
-          },
-        },
-      }),
-    });
-  });
-
-  await fillLoginForm(page, email, "Admin@12345");
+  await fillLoginForm(page, email, "Admin@123");
 
   await Promise.all([
     page.waitForURL(/\/admin\/?$/),
