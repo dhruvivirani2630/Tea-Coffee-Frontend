@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "playwright test tests/e2e/open_localhost.spec.js",
+    "test:auth": "playwright test tests/e2e/register.spec.js tests/e2e/login.spec.js",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --coverageReporters=html",
     "test:unit": "jest tests/unit",

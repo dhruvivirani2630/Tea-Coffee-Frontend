@@ -1,42 +1,72 @@
-<testsuites id="" name="" tests="10" failures="0" skipped="0" errors="0" time="25.658832999999998">
-<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.916" errors="0">
-<testcase name="open localhost" classname="open_localhost.spec.js" time="1.916">
+<testsuites id="" name="" tests="20" failures="0" skipped="0" errors="0" time="41.042269">
+<testsuite name="login.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="chromium" tests="2" failures="0" skipped="0" time="3.026" errors="0">
+<testcase name="User can login and reach the dashboard" classname="login.spec.js" time="1.623">
+</testcase>
+<testcase name="Admin can login and reach the admin dashboard" classname="login.spec.js" time="1.403">
 </testcase>
 </testsuite>
-<testsuite name="register.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.151" errors="0">
-<testcase name="User can register successfully" classname="register.spec.js" time="2.151">
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.475" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="1.475">
 </testcase>
 </testsuite>
-<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="firefox" tests="1" failures="0" skipped="0" time="9.255" errors="0">
-<testcase name="open localhost" classname="open_localhost.spec.js" time="9.255">
+<testsuite name="register.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.805" errors="0">
+<testcase name="User can register successfully" classname="register.spec.js" time="1.805">
 </testcase>
 </testsuite>
-<testsuite name="register.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="firefox" tests="1" failures="0" skipped="0" time="9.733" errors="0">
-<testcase name="User can register successfully" classname="register.spec.js" time="9.733">
+<testsuite name="login.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="firefox" tests="2" failures="0" skipped="0" time="19.189" errors="0">
+<testcase name="User can login and reach the dashboard" classname="login.spec.js" time="7.039">
+</testcase>
+<testcase name="Admin can login and reach the admin dashboard" classname="login.spec.js" time="12.15">
 </testcase>
 </testsuite>
-<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="webkit" tests="1" failures="0" skipped="0" time="6.173" errors="0">
-<testcase name="open localhost" classname="open_localhost.spec.js" time="6.173">
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="firefox" tests="1" failures="0" skipped="0" time="12.207" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="12.207">
 </testcase>
 </testsuite>
-<testsuite name="register.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="webkit" tests="1" failures="0" skipped="0" time="7.148" errors="0">
-<testcase name="User can register successfully" classname="register.spec.js" time="7.148">
+<testsuite name="register.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="firefox" tests="1" failures="0" skipped="0" time="12.981" errors="0">
+<testcase name="User can register successfully" classname="register.spec.js" time="12.981">
 </testcase>
 </testsuite>
-<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="Mobile Chrome" tests="1" failures="0" skipped="0" time="2.228" errors="0">
-<testcase name="open localhost" classname="open_localhost.spec.js" time="2.228">
+<testsuite name="login.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="webkit" tests="2" failures="0" skipped="0" time="9.433" errors="0">
+<testcase name="User can login and reach the dashboard" classname="login.spec.js" time="4.661">
+</testcase>
+<testcase name="Admin can login and reach the admin dashboard" classname="login.spec.js" time="4.772">
 </testcase>
 </testsuite>
-<testsuite name="register.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="Mobile Chrome" tests="1" failures="0" skipped="0" time="2.579" errors="0">
-<testcase name="User can register successfully" classname="register.spec.js" time="2.579">
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="webkit" tests="1" failures="0" skipped="0" time="3.437" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="3.437">
 </testcase>
 </testsuite>
-<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="Mobile Safari" tests="1" failures="0" skipped="0" time="3.663" errors="0">
-<testcase name="open localhost" classname="open_localhost.spec.js" time="3.663">
+<testsuite name="register.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="webkit" tests="1" failures="0" skipped="0" time="5.307" errors="0">
+<testcase name="User can register successfully" classname="register.spec.js" time="5.307">
 </testcase>
 </testsuite>
-<testsuite name="register.spec.js" timestamp="2026-06-27T10:42:25.526Z" hostname="Mobile Safari" tests="1" failures="0" skipped="0" time="2.141" errors="0">
-<testcase name="User can register successfully" classname="register.spec.js" time="2.141">
+<testsuite name="login.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Chrome" tests="2" failures="0" skipped="0" time="4.721" errors="0">
+<testcase name="User can login and reach the dashboard" classname="login.spec.js" time="2.378">
+</testcase>
+<testcase name="Admin can login and reach the admin dashboard" classname="login.spec.js" time="2.343">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Chrome" tests="1" failures="0" skipped="0" time="2.16" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="2.16">
+</testcase>
+</testsuite>
+<testsuite name="register.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Chrome" tests="1" failures="0" skipped="0" time="1.746" errors="0">
+<testcase name="User can register successfully" classname="register.spec.js" time="1.746">
+</testcase>
+</testsuite>
+<testsuite name="login.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Safari" tests="2" failures="0" skipped="0" time="7.765" errors="0">
+<testcase name="User can login and reach the dashboard" classname="login.spec.js" time="3.767">
+</testcase>
+<testcase name="Admin can login and reach the admin dashboard" classname="login.spec.js" time="3.998">
+</testcase>
+</testsuite>
+<testsuite name="open_localhost.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Safari" tests="1" failures="0" skipped="0" time="2.59" errors="0">
+<testcase name="open localhost" classname="open_localhost.spec.js" time="2.59">
+</testcase>
+</testsuite>
+<testsuite name="register.spec.js" timestamp="2026-06-27T10:50:37.493Z" hostname="Mobile Safari" tests="1" failures="0" skipped="0" time="2.61" errors="0">
+<testcase name="User can register successfully" classname="register.spec.js" time="2.61">
 </testcase>
 </testsuite>
 </testsuites>

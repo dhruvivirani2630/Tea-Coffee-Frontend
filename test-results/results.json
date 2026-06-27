@@ -142,6 +142,354 @@
   },
   "suites": [
     {
+      "title": "login.spec.js",
+      "file": "login.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "User can login and reach the dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1623,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:38.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-3a6e14a6cecf4266ff5d",
+          "file": "login.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Admin can login and reach the admin dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1403,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:38.489Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-0a11ff96aaa5a5f86637",
+          "file": "login.spec.js",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "User can login and reach the dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7039,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:41.404Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-cb737048b2c6de3d41a9",
+          "file": "login.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Admin can login and reach the admin dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 12150,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:41.530Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-39acb7665d2f167c757a",
+          "file": "login.spec.js",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "User can login and reach the dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4661,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:59.298Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-28f2f226bf967056ec6e",
+          "file": "login.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Admin can login and reach the admin dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4772,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:50:59.602Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-20020819c5f53f5a9876",
+          "file": "login.spec.js",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "User can login and reach the dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Chrome",
+              "projectName": "Mobile Chrome",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:51:07.217Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-742b6cc8fb1d49717c55",
+          "file": "login.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Admin can login and reach the admin dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Chrome",
+              "projectName": "Mobile Chrome",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2343,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:51:07.268Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-f3f5566a7cde6e448304",
+          "file": "login.spec.js",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "User can login and reach the dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Safari",
+              "projectName": "Mobile Safari",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3767,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:51:12.593Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-975c6eaca01d3ed0fa01",
+          "file": "login.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "Admin can login and reach the admin dashboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Safari",
+              "projectName": "Mobile Safari",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3998,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:51:12.669Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "badc1754af1944f68b2b-8f98766d72bc3a2e7e74",
+          "file": "login.spec.js",
+          "line": 48,
+          "column": 1
+        }
+      ]
+    },
+    {
       "title": "open_localhost.spec.js",
       "file": "open_localhost.spec.js",
       "column": 0,
@@ -160,15 +508,15 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 1916,
+                  "duration": 1475,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:27.746Z",
+                  "startTime": "2026-06-27T10:50:38.555Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -194,15 +542,15 @@
               "projectName": "firefox",
               "results": [
                 {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
+                  "workerIndex": 6,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 9255,
+                  "duration": 12207,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:27.694Z",
+                  "startTime": "2026-06-27T10:50:41.610Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -228,15 +576,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 4,
+                  "workerIndex": 10,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6173,
+                  "duration": 3437,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:35.275Z",
+                  "startTime": "2026-06-27T10:51:00.835Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -262,15 +610,15 @@
               "projectName": "Mobile Chrome",
               "results": [
                 {
-                  "workerIndex": 8,
+                  "workerIndex": 14,
                   "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 2228,
+                  "duration": 2160,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:45.465Z",
+                  "startTime": "2026-06-27T10:51:07.302Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -296,15 +644,15 @@
               "projectName": "Mobile Safari",
               "results": [
                 {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 3663,
+                  "duration": 2590,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:45.414Z",
+                  "startTime": "2026-06-27T10:51:12.704Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -338,15 +686,15 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 2151,
+                  "duration": 1805,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:27.737Z",
+                  "startTime": "2026-06-27T10:50:38.475Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -372,15 +720,15 @@
               "projectName": "firefox",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 9733,
+                  "duration": 12981,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:27.835Z",
+                  "startTime": "2026-06-27T10:50:41.732Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -406,15 +754,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 7148,
+                  "duration": 5307,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:36.528Z",
+                  "startTime": "2026-06-27T10:51:00.940Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -440,15 +788,15 @@
               "projectName": "Mobile Chrome",
               "results": [
                 {
-                  "workerIndex": 6,
+                  "workerIndex": 15,
                   "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 2579,
+                  "duration": 1746,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:45.364Z",
+                  "startTime": "2026-06-27T10:51:09.922Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -474,15 +822,15 @@
               "projectName": "Mobile Safari",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
+                  "workerIndex": 19,
+                  "parallelIndex": 3,
                   "status": "passed",
-                  "duration": 2141,
+                  "duration": 2610,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T10:42:48.509Z",
+                  "startTime": "2026-06-27T10:51:15.327Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -500,9 +848,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-27T10:42:25.414Z",
-    "duration": 25658.833,
-    "expected": 10,
+    "startTime": "2026-06-27T10:50:37.359Z",
+    "duration": 41042.269,
+    "expected": 20,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
