@@ -1,3 +1,5 @@
+import { normalizeRole } from "../constants/roles";
+
 const now = () => new Date().toISOString();
 
 const resolveName = (user = {}) => user.name || user.fullName || "";
@@ -9,12 +11,13 @@ export const normalizeUserRecord = (user = {}) => {
 
   return {
     ...user,
+    id: user.id || user._id || "",
     name,
     fullName: user.fullName || name,
     email: (user.email || "").trim().toLowerCase(),
     phone: (user.phone || "").trim(),
     employeeId: (user.employeeId || "").trim(),
-    role: user.role || "User",
+    role: normalizeRole(user.role),
     status: user.status || "Active",
     profileImage: user.profileImage || "",
     updatedBy: user.updatedBy || null,

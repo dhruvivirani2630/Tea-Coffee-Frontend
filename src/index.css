@@ -206,6 +206,14 @@ p {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.topbar-actions .button {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .shell-body {
@@ -236,6 +244,23 @@ p {
 .sidebar a:hover {
   color: white;
   background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-section {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  padding: 0 12px;
 }
 
 .content {

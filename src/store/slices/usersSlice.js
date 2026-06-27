@@ -6,7 +6,7 @@ const normalizeRejectedError = (error) =>
   error?.message || (typeof error === "string" ? error : "Something went wrong.");
 
 export const fetchUsers = createAsyncThunk(
-  "users/fetchUsers",
+  "/users",
   async (filters = {}, { rejectWithValue }) => {
     try {
       return await userService.getUsers(filters);
@@ -63,6 +63,9 @@ export const setUserStatusById = createAsyncThunk(
 
 const initialState = {
   items: [],
+  total: 0,
+  page: 1,
+  totalPages: 1,
   selectedUser: null,
   status: "idle",
   selectedStatus: "idle",
@@ -89,7 +92,17 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.items = action.payload;
+        if (Array.isArray(action.payload)) {
+          state.items = action.payload;
+          state.total = action.payload.length;
+          state.page = 1;
+          state.totalPages = 1;
+        } else {
+          state.items = action.payload.users;
+          state.total = action.payload.total;
+          state.page = action.payload.page;
+          state.totalPages = action.payload.totalPages;
+        }
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = "failed";

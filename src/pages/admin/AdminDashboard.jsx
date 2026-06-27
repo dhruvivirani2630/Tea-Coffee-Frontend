@@ -7,10 +7,11 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 const AdminDashboard = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.items);
+  const totalUsers = useAppSelector((state) => state.users.total);
   const loading = useAppSelector((state) => state.users.status === "loading");
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchUsers({ page: 1, limit: 1000 }));
   }, [dispatch]);
 
   if (loading) return <Loader label="Loading admin dashboard" />;
@@ -29,7 +30,7 @@ const AdminDashboard = () => {
       <div className="stats-grid">
         <article className="stat">
           <span>Total Users</span>
-          <strong>{users.length}</strong>
+          <strong>{totalUsers || users.length}</strong>
         </article>
         <article className="stat">
           <span>Active Accounts</span>

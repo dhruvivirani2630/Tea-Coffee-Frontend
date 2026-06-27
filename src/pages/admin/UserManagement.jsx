@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmationModal from "../../components/common/ConfirmationModal";
+import Loader from "../../components/common/Loader";
 import Pagination from "../../components/common/Pagination";
 import SearchBar from "../../components/common/SearchBar";
 import UserTable from "../../components/tables/UserTable";
@@ -12,6 +13,9 @@ const pageSize = 6;
 const UserManagement = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.items);
+  const totalPages = useAppSelector((state) => state.users.totalPages);
+  const loading = useAppSelector((state) => state.users.status === "loading");
+  const error = useAppSelector((state) => state.users.error);
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("All");
   const [status, setStatus] = useState("All");
@@ -19,9 +23,11 @@ const UserManagement = () => {
   const [message, setMessage] = useState("");
   const [pendingDelete, setPendingDelete] = useState(null);
 
+  const fetchParams = { page, limit: pageSize, search, role, status };
+
   useEffect(() => {
-    dispatch(fetchUsers({ search, role, status }));
-  }, [dispatch, search, role, status]);
+    dispatch(fetchUsers(fetchParams));
+  }, [dispatch, page, search, role, status]);
 
   const handleSearchChange = (value) => {
     setPage(1);
@@ -38,17 +44,14 @@ const UserManagement = () => {
     setStatus(value);
   };
 
-  const pageCount = Math.max(1, Math.ceil(users.length / pageSize));
-  const visibleUsers = useMemo(() => users.slice((page - 1) * pageSize, page * pageSize), [users, page]);
-
   const toggleStatus = async (user) => {
     const nextStatus = user.status === STATUS.ACTIVE ? STATUS.INACTIVE : STATUS.ACTIVE;
     try {
       await dispatch(setUserStatusById({ id: user.id, status: nextStatus })).unwrap();
       setMessage(`${user.fullName} marked ${nextStatus}.`);
-      dispatch(fetchUsers({ search, role, status }));
-    } catch (error) {
-      setMessage(error?.message || "Unable to update user status.");
+      dispatch(fetchUsers(fetchParams));
+    } catch (toggleError) {
+      setMessage(toggleError?.message || "Unable to update user status.");
     }
   };
 
@@ -57,12 +60,14 @@ const UserManagement = () => {
       await dispatch(deleteUserById(pendingDelete.id)).unwrap();
       setMessage(`${pendingDelete.fullName} deleted.`);
       setPendingDelete(null);
-      dispatch(fetchUsers({ search, role, status }));
-    } catch (error) {
-      setMessage(error?.message || "Unable to delete user.");
+      dispatch(fetchUsers(fetchParams));
+    } catch (deleteError) {
+      setMessage(deleteError?.message || "Unable to delete user.");
       setPendingDelete(null);
     }
   };
+
+  if (loading && !users.length) return <Loader label="Loading users" />;
 
   return (
     <section>
@@ -73,6 +78,7 @@ const UserManagement = () => {
         </div>
       </div>
       {message && <div className="alert success">{message}</div>}
+      {error && <div className="alert error">{error}</div>}
       <div className="toolbar">
         <SearchBar value={search} onChange={handleSearchChange} placeholder="Search name, ID, email, phone" />
         <select value={role} onChange={(event) => handleRoleChange(event.target.value)}>
@@ -86,8 +92,12 @@ const UserManagement = () => {
           <option>{STATUS.INACTIVE}</option>
         </select>
       </div>
-      <UserTable users={visibleUsers} onToggleStatus={toggleStatus} onDelete={setPendingDelete} />
-      <Pagination page={page} pageCount={pageCount} onPageChange={(next) => setPage(Math.min(pageCount, Math.max(1, next)))} />
+      <UserTable users={users} onToggleStatus={toggleStatus} onDelete={setPendingDelete} />
+      <Pagination
+        page={page}
+        pageCount={totalPages}
+        onPageChange={(next) => setPage(Math.min(totalPages, Math.max(1, next)))}
+      />
       <ConfirmationModal
         open={Boolean(pendingDelete)}
         title="Delete User"

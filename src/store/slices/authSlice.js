@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "../../services/authService";
 import userService from "../../services/userService";
+import { sanitizeUserRecord } from "../../utils/userModel";
+
+const normalizeAuthUser = (user) => (user ? sanitizeUserRecord(user) : null);
 
 const getErrorMessage = (error) => error?.message || "Something went wrong.";
 const normalizeRejectedError = (error) =>
@@ -99,7 +102,7 @@ const authSlice = createSlice({
       state.status = "succeeded";
       state.error = null;
       if (action.payload) {
-        state.user = action.payload.user ?? action.payload;
+        state.user = normalizeAuthUser(action.payload.user ?? action.payload);
         state.token = action.payload.token ?? state.token;
       }
     };
@@ -115,7 +118,7 @@ const authSlice = createSlice({
         state.status = "succeeded";
         state.bootstrapped = true;
         state.error = null;
-        state.user = action.payload?.user ?? null;
+        state.user = normalizeAuthUser(action.payload?.user ?? null);
         state.token = action.payload?.token ?? null;
       })
       .addCase(hydrateSession.rejected, (state, action) => {
@@ -136,11 +139,11 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.rejected, rejected)
       .addCase(refreshCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = normalizeAuthUser(action.payload);
       })
       .addCase(refreshCurrentUser.rejected, rejected)
       .addCase(updateCurrentUserProfile.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = normalizeAuthUser(action.payload);
       })
       .addCase(updateCurrentUserProfile.rejected, rejected);
   },
