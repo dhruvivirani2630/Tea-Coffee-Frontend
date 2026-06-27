@@ -34,7 +34,7 @@ test("User can register successfully", async ({ page }) => {
   await page.getByLabel("Employee ID").fill(employeeId);
   await page.locator('input[name="email"]').fill(email);
   await page.getByLabel("Password").fill("Test@123");
-
+await page.pause();
   await Promise.all([
     page.waitForURL(/\/dashboard\/?$/),
     page.getByRole("button", { name: "Create account" }).click(),

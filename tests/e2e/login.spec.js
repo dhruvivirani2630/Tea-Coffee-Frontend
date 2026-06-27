@@ -34,7 +34,7 @@ test("User can login and reach the dashboard", async ({ page }) => {
   });
 
   await fillLoginForm(page, email, "User@1234");
-
+await page.pause();
   await Promise.all([
     page.waitForURL(/\/dashboard\/?$/),
     page.getByRole("button", { name: "Login" }).click(),
