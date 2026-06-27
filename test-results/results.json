@@ -134,7 +134,7 @@
     "version": "1.61.1",
     "workers": 4,
     "webServer": {
-      "command": "npm run dev",
+      "command": "powershell -Command \"$env:VITE_USE_MOCK_API='false'; npm run dev\"",
       "url": "http://localhost:5173",
       "reuseExistingServer": true,
       "timeout": 120000
@@ -163,12 +163,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1115,
+                  "duration": 1916,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T09:36:14.243Z",
+                  "startTime": "2026-06-27T10:42:27.746Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -194,15 +194,15 @@
               "projectName": "firefox",
               "results": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 4083,
+                  "duration": 9255,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T09:36:14.210Z",
+                  "startTime": "2026-06-27T10:42:27.694Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -228,15 +228,15 @@
               "projectName": "webkit",
               "results": [
                 {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1939,
+                  "duration": 6173,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T09:36:14.243Z",
+                  "startTime": "2026-06-27T10:42:35.275Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -262,15 +262,15 @@
               "projectName": "Mobile Chrome",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
+                  "workerIndex": 8,
+                  "parallelIndex": 2,
                   "status": "passed",
-                  "duration": 1153,
+                  "duration": 2228,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T09:36:14.210Z",
+                  "startTime": "2026-06-27T10:42:45.465Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -296,15 +296,15 @@
               "projectName": "Mobile Safari",
               "results": [
                 {
-                  "workerIndex": 4,
+                  "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1313,
+                  "duration": 3663,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-06-27T09:36:17.048Z",
+                  "startTime": "2026-06-27T10:42:45.414Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -318,13 +318,191 @@
           "column": 1
         }
       ]
+    },
+    {
+      "title": "register.spec.js",
+      "file": "register.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "User can register successfully",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2151,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:42:27.737Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7c115290b02b9676bce-a4a121fc420ff557bb02",
+          "file": "register.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "User can register successfully",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 9733,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:42:27.835Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7c115290b02b9676bce-e6806e4939ff8e7ee67d",
+          "file": "register.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "User can register successfully",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7148,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:42:36.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7c115290b02b9676bce-6fac4cfbd44e1c679623",
+          "file": "register.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "User can register successfully",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Chrome",
+              "projectName": "Mobile Chrome",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 2579,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:42:45.364Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7c115290b02b9676bce-9e58734e43e4d274d3cf",
+          "file": "register.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "User can register successfully",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "Mobile Safari",
+              "projectName": "Mobile Safari",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2141,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-06-27T10:42:48.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7c115290b02b9676bce-10c33bdf60fc9d505edb",
+          "file": "register.spec.js",
+          "line": 3,
+          "column": 1
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-27T09:36:10.886Z",
-    "duration": 9692.574,
-    "expected": 5,
+    "startTime": "2026-06-27T10:42:25.414Z",
+    "duration": 25658.833,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

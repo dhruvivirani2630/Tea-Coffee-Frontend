@@ -43,7 +43,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    command: 'powershell -Command "$env:VITE_USE_MOCK_API=\'false\'; npm run dev"',
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000
