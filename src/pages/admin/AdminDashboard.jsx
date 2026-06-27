@@ -11,8 +11,10 @@ const AdminDashboard = () => {
   const loading = useAppSelector((state) => state.users.status === "loading");
 
   useEffect(() => {
-    dispatch(fetchUsers({ page: 1, limit: 1000 }));
-  }, [dispatch]);
+    if (!users.length) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, users.length]);
 
   if (loading) return <Loader label="Loading admin dashboard" />;
 

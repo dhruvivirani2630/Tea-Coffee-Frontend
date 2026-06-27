@@ -16,7 +16,7 @@ Open `http://localhost:5173`.
 
 | Variable | Description |
 | --- | --- |
-| `VITE_API_BASE_URL` | Backend API base URL (default: `http://localhost:3001/api`) |
+| `VITE_API_BASE_URL` | Backend API base URL (default: `http://localhost:3001/api/`) |
 | `VITE_USE_MOCK_API` | Set to `true` for localStorage mock; set to `false` for a real backend |
 
 ## Demo accounts (seed data)

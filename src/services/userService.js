@@ -8,12 +8,15 @@ import {
   withUpdatedDate,
 } from "../utils/mockDb";
 import { validateProfileFields } from "../utils/validators";
-import { normalizeUserRecord, sanitizeUserRecord } from "../utils/userModel";
+import { sanitizeUserRecord } from "../utils/userModel";
 
 const delay = (value) => new Promise((resolve) => setTimeout(() => resolve(value), 250));
-const PROFILE_ENDPOINT = "api/auth/profile";
-const USERS_ENDPOINT = "api/users";
-const UPDATE_PROFILE_ENDPOINT = "api/users/update-profile";
+const PROFILE_ENDPOINT = "auth/profile";
+const USERS_ENDPOINT = "users";
+const UPDATE_PROFILE_ENDPOINT = "users/update-profile";
+const USERS_CACHE_TTL = 30000;
+const usersCache = new Map();
+const usersInFlight = new Map();
 
 const getResponseUser = (response) => {
   const data = response.data?.data || response.data || {};
@@ -29,6 +32,34 @@ const getApiError = (error, fallback = "Something went wrong.") => {
 };
 
 const useMockApi = import.meta.env.VITE_USE_MOCK_API !== "false";
+
+const getUsersCacheKey = (params = {}) =>
+  JSON.stringify({
+    page: params.page ?? null,
+    limit: params.limit ?? null,
+    search: params.search ?? "",
+    role: params.role ?? "",
+    status: params.status ?? "",
+  });
+
+const getCachedUsers = (key) => {
+  const cached = usersCache.get(key);
+  if (!cached) return null;
+  if (Date.now() - cached.timestamp > USERS_CACHE_TTL) {
+    usersCache.delete(key);
+    return null;
+  }
+  return cached.value;
+};
+
+const setCachedUsers = (key, value) => {
+  usersCache.set(key, { value, timestamp: Date.now() });
+};
+
+const clearUsersCache = () => {
+  usersCache.clear();
+  usersInFlight.clear();
+};
 
 const parseUsersResponse = (response, page, limit) => {
   const data = response.data?.data || response.data || {};
@@ -112,6 +143,7 @@ export const userService = {
       console.log("👤 Updated profile data:", updatedProfile);
       if (updatedProfile?.id || updatedProfile?.email || updatedProfile?.employeeId) {
         const sanitized = sanitizeUserRecord(updatedProfile);
+        clearUsersCache();
         console.log("✨ Profile updated successfully (sanitized):", sanitized);
         return sanitized;
       }
@@ -143,57 +175,80 @@ export const userService = {
         : user,
     );
     saveUsersToStorage(updated);
+    clearUsersCache();
     const finalProfile = sanitizeUserRecord(updated.find((user) => user.id === userId));
     console.log("💾 Mock profile updated and saved:", finalProfile);
     return delay(finalProfile);
   },
 
-  async getUsers({ page = 1, limit = 6, search = "", role = "All", status = "All" } = {}) {
+  async getUsers({ page, limit, search = "", role, status } = {}) {
     const params = { page, limit, search, role, status };
+    const cacheKey = getUsersCacheKey(params);
     console.log("[Users] getUsers started", { endpoint: USERS_ENDPOINT, params });
 
-    if (!useMockApi) {
+    const cachedResult = getCachedUsers(cacheKey);
+    if (cachedResult) {
+      console.log("[Users] getUsers cache hit", { cacheKey });
+      return delay(cachedResult);
+    }
+
+    const existingRequest = usersInFlight.get(cacheKey);
+    if (existingRequest) {
+      console.log("[Users] getUsers reused in-flight request", { cacheKey });
+      return existingRequest;
+    }
+
+    const request = (async () => {
       try {
-        const response = await axiosClient.get(USERS_ENDPOINT, { params });
-        const result = parseUsersResponse(response, page, limit);
-        console.log("[Users] getUsers succeeded", {
+        if (!useMockApi) {
+          const response = await axiosClient.get(USERS_ENDPOINT, { params });
+          const result = parseUsersResponse(response, page, limit);
+          console.log("[Users] getUsers succeeded", {
+            total: result.total,
+            page: result.page,
+            totalPages: result.totalPages,
+            count: result.users.length,
+          });
+          setCachedUsers(cacheKey, result);
+          return result;
+        }
+
+        await axiosClient.get(USERS_ENDPOINT);
+        const term = search.trim().toLowerCase();
+        const filteredUsers = getUsersFromStorage()
+          .map(sanitizeUser)
+          .filter((user) => {
+            const matchesSearch =
+              !term ||
+              [user.fullName, user.employeeId, user.email, user.phone].some((value) =>
+                value.toLowerCase().includes(term),
+              );
+            const matchesRole = role === "All" || user.role === role;
+            const matchesStatus = status === "All" || user.status === status;
+            return matchesSearch && matchesRole && matchesStatus;
+          });
+        const total = filteredUsers.length;
+        const totalPages = Math.max(1, Math.ceil(total / limit));
+        const users = filteredUsers.slice((page - 1) * limit, page * limit);
+        const result = { users, total, page, totalPages };
+        console.log("[Users] getUsers succeeded (mock)", {
           total: result.total,
           page: result.page,
           totalPages: result.totalPages,
           count: result.users.length,
         });
-        return result;
+        setCachedUsers(cacheKey, result);
+        return delay(result);
       } catch (error) {
         console.log("[Users] getUsers failed", error);
         throw getApiError(error, "Unable to load users.");
+      } finally {
+        usersInFlight.delete(cacheKey);
       }
-    }
+    })();
 
-    await axiosClient.get(USERS_ENDPOINT);
-    const term = search.trim().toLowerCase();
-    const filteredUsers = getUsersFromStorage()
-      .map(sanitizeUser)
-      .filter((user) => {
-        const matchesSearch =
-          !term ||
-          [user.fullName, user.employeeId, user.email, user.phone].some((value) =>
-            value.toLowerCase().includes(term),
-          );
-        const matchesRole = role === "All" || user.role === role;
-        const matchesStatus = status === "All" || user.status === status;
-        return matchesSearch && matchesRole && matchesStatus;
-      });
-    const total = filteredUsers.length;
-    const totalPages = Math.max(1, Math.ceil(total / limit));
-    const users = filteredUsers.slice((page - 1) * limit, page * limit);
-    const result = { users, total, page, totalPages };
-    console.log("[Users] getUsers succeeded (mock)", {
-      total: result.total,
-      page: result.page,
-      totalPages: result.totalPages,
-      count: result.users.length,
-    });
-    return delay(result);
+    usersInFlight.set(cacheKey, request);
+    return request;
   },
 
   async getUserById(id) {
@@ -230,7 +285,9 @@ export const userService = {
         const data = response.data?.data || response.data || {};
         const user = data.user || data;
         if (!user?.id && !user?._id) throw { message: "User not found." };
-        return sanitizeUserRecord(user);
+        const sanitized = sanitizeUserRecord(user);
+        clearUsersCache();
+        return sanitized;
       } catch (error) {
         throw getApiError(error, "Unable to update user.");
       }
@@ -258,6 +315,7 @@ export const userService = {
       });
     });
     saveUsersToStorage(updatedUsers);
+    clearUsersCache();
     return delay(sanitizeUser(updatedUsers.find((user) => user.id === id)));
   },
 
@@ -268,6 +326,7 @@ export const userService = {
     if (!user) throw { message: "User not found." };
     if (user.role === ROLES.ADMIN) throw { message: "Admin account cannot be deleted." };
     saveUsersToStorage(users.filter((item) => item.id !== id));
+    clearUsersCache();
     return delay({ success: true });
   },
 
@@ -276,8 +335,12 @@ export const userService = {
       throw { message: "Invalid status." };
     }
     const user = await this.getUserById(id);
-    return this.updateUser(id, { ...user, status });
+    const updatedUser = await this.updateUser(id, { ...user, status });
+    clearUsersCache();
+    return updatedUser;
   },
 };
+
+export { clearUsersCache };
 
 export default userService;

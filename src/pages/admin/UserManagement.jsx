@@ -8,12 +8,11 @@ import { ROLES, STATUS } from "../../constants/roles";
 import { deleteUserById, fetchUsers, setUserStatusById } from "../../store/slices/usersSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-const pageSize = 6;
+const pageSize = 10;
 
 const UserManagement = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.items);
-  const totalPages = useAppSelector((state) => state.users.totalPages);
   const loading = useAppSelector((state) => state.users.status === "loading");
   const error = useAppSelector((state) => state.users.error);
   const [search, setSearch] = useState("");
@@ -23,11 +22,29 @@ const UserManagement = () => {
   const [message, setMessage] = useState("");
   const [pendingDelete, setPendingDelete] = useState(null);
 
-  const fetchParams = { page, limit: pageSize, search, role, status };
-
   useEffect(() => {
-    dispatch(fetchUsers(fetchParams));
-  }, [dispatch, page, search, role, status]);
+    if (!users.length) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, users.length]);
+
+  const filteredUsers = users.filter((user) => {
+    const term = search.trim().toLowerCase();
+    const matchesSearch =
+      !term ||
+      [user.fullName, user.employeeId, user.email, user.phone].some((value) =>
+        String(value || "")
+          .toLowerCase()
+          .includes(term),
+      );
+    const matchesRole = role === "All" || user.role === role;
+    const matchesStatus = status === "All" || user.status === status;
+    return matchesSearch && matchesRole && matchesStatus;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const visibleUsers = filteredUsers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   const handleSearchChange = (value) => {
     setPage(1);
@@ -49,7 +66,6 @@ const UserManagement = () => {
     try {
       await dispatch(setUserStatusById({ id: user.id, status: nextStatus })).unwrap();
       setMessage(`${user.fullName} marked ${nextStatus}.`);
-      dispatch(fetchUsers(fetchParams));
     } catch (toggleError) {
       setMessage(toggleError?.message || "Unable to update user status.");
     }
@@ -60,7 +76,6 @@ const UserManagement = () => {
       await dispatch(deleteUserById(pendingDelete.id)).unwrap();
       setMessage(`${pendingDelete.fullName} deleted.`);
       setPendingDelete(null);
-      dispatch(fetchUsers(fetchParams));
     } catch (deleteError) {
       setMessage(deleteError?.message || "Unable to delete user.");
       setPendingDelete(null);
@@ -82,19 +97,19 @@ const UserManagement = () => {
       <div className="toolbar">
         <SearchBar value={search} onChange={handleSearchChange} placeholder="Search name, ID, email, phone" />
         <select value={role} onChange={(event) => handleRoleChange(event.target.value)}>
-          <option>All</option>
-          <option>{ROLES.ADMIN}</option>
-          <option>{ROLES.USER}</option>
+          <option value="All">All</option>
+          <option value={ROLES.ADMIN}>{ROLES.ADMIN}</option>
+          <option value={ROLES.USER}>{ROLES.USER}</option>
         </select>
         <select value={status} onChange={(event) => handleStatusChange(event.target.value)}>
-          <option>All</option>
-          <option>{STATUS.ACTIVE}</option>
-          <option>{STATUS.INACTIVE}</option>
+          <option value="All">All</option>
+          <option value={STATUS.ACTIVE}>{STATUS.ACTIVE}</option>
+          <option value={STATUS.INACTIVE}>{STATUS.INACTIVE}</option>
         </select>
       </div>
-      <UserTable users={users} onToggleStatus={toggleStatus} onDelete={setPendingDelete} />
+      <UserTable users={visibleUsers} onToggleStatus={toggleStatus} onDelete={setPendingDelete} />
       <Pagination
-        page={page}
+        page={currentPage}
         pageCount={totalPages}
         onPageChange={(next) => setPage(Math.min(totalPages, Math.max(1, next)))}
       />

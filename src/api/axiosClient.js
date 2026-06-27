@@ -4,7 +4,13 @@ import { parseToken } from "../utils/mockDb";
 import { clearSession, redirectToLogin } from "../utils/session";
 
 const useMockApi = import.meta.env.VITE_USE_MOCK_API !== "false";
-const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api";
+const normalizeBaseURL = (url) => {
+  const trimmed = url?.replace(/\/+$/, "");
+  if (!trimmed) return "http://localhost:3001/api/";
+  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+};
+
+const baseURL = normalizeBaseURL(import.meta.env.VITE_API_BASE_URL);
 console.log(`Using API base URL: ${baseURL}`);
 const mockAdapter = async (config) => ({
   data: { ok: true },

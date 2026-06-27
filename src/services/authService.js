@@ -28,7 +28,7 @@ export const authService = {
     console.log("[Auth] Register started", getSafeSignupLogPayload(payload));
 
     try {
-      const response = await axiosClient.post("api/auth/register", registerPayload);
+      const response = await axiosClient.post("auth/register", registerPayload);
       const data = response.data?.data || response.data || {};
       console.log("[Auth] Register succeeded", data.user);
       return data; // { token, user }
@@ -43,7 +43,7 @@ export const authService = {
     console.log("[Auth] Login started", { identifier, email, phone });
 
     try {
-      const response = await axiosClient.post("api/auth/login", loginPayload);
+      const response = await axiosClient.post("auth/login", loginPayload);
       const data = response.data?.data || response.data || {};
       console.log("[Auth] Login succeeded", data.user);
       return data; // { token, user }
@@ -55,7 +55,7 @@ export const authService = {
 
   async logout() {
     try {
-      await axiosClient.post("api/auth/logout");
+      await axiosClient.post("auth/logout");
     } catch (error) {
       console.log("[Auth] Logout request failed", error);
     }
@@ -64,7 +64,7 @@ export const authService = {
 
   async getSession() {
     try {
-      const response = await axiosClient.get("api/auth/profile");
+      const response = await axiosClient.get("auth/profile");
       const data = response.data?.data || response.data || {};
       return { user: data.user };
     } catch (error) {
