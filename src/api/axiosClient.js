@@ -6,7 +6,7 @@ import { clearSession, redirectToLogin } from "../utils/session";
 const useMockApi = import.meta.env.VITE_USE_MOCK_API !== "false";
 const normalizeBaseURL = (url) => {
   const trimmed = url?.replace(/\/+$/, "");
-  if (!trimmed) return "http://localhost:3001/api/";
+  if (!trimmed) return import.meta.env.VITE_API_BASE_URL;
   return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
 };
 

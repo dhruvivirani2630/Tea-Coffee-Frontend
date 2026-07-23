@@ -1,5 +1,7 @@
 import axiosClient from "../api/axiosClient";
 
+let getSessionRequest = null;
+
 const getSafeSignupLogPayload = (payload) => ({
   fullName: payload.fullName,
   employeeId: payload.employeeId,
@@ -63,14 +65,24 @@ export const authService = {
   },
 
   async getSession() {
-    try {
-      const response = await axiosClient.get("auth/profile");
-      const data = response.data?.data || response.data || {};
-      return { user: data.user };
-    } catch (error) {
-      console.log("[Auth] getSession failed", error);
-      return null;
+    if (getSessionRequest) {
+      return getSessionRequest;
     }
+
+    getSessionRequest = (async () => {
+      try {
+        const response = await axiosClient.get("auth/profile");
+        const data = response.data?.data || response.data || {};
+        return { user: data.user };
+      } catch (error) {
+        console.log("[Auth] getSession failed", error);
+        return null;
+      } finally {
+        getSessionRequest = null;
+      }
+    })();
+
+    return getSessionRequest;
   },
 };
 

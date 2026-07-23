@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { isAdminRole } from "../../constants/roles";
 import { formatDate } from "../../utils/date";
 
 const UserTable = ({ users, onToggleStatus, onDelete }) => (
@@ -32,12 +33,16 @@ const UserTable = ({ users, onToggleStatus, onDelete }) => (
               <div className="row-actions">
                 <Link to={`/admin/users/${user.id}`}>View</Link>
                 <Link to={`/admin/users/${user.id}/edit`}>Edit</Link>
-                <button type="button" onClick={() => onToggleStatus(user)}>
-                  {user.status === "Active" ? "Deactivate" : "Activate"}
-                </button>
-                <button type="button" className="danger-link" onClick={() => onDelete(user)}>
-                  Delete
-                </button>
+                {!isAdminRole(user.role) && (
+                  <>
+                    <button type="button" onClick={() => onToggleStatus(user)}>
+                      {user.status === "Active" ? "Deactivate" : "Activate"}
+                    </button>
+                    <button type="button" className="danger-link" onClick={() => onDelete(user)}>
+                      Delete
+                    </button>
+                  </>
+                )}
               </div>
             </td>
           </tr>

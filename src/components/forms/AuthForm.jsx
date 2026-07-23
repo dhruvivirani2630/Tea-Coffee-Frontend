@@ -67,11 +67,11 @@ const AuthForm = ({
         {loading ? "Please wait..." : isSignup ? "Create account" : "Login"}
       </button>
 
-      {!isSignup && (
-        <Link className="link-muted" to="/forgot-password">
-          Forgot password?
-        </Link>
-      )}
+      {/* {!isSignup && (
+        // <Link className="link-muted" to="/forgot-password">
+        //   Forgot password?
+        // </Link>
+      )} */}
     </form>
   );
 };

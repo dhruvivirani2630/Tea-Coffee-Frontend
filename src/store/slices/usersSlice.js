@@ -39,7 +39,7 @@ export const updateUserById = createAsyncThunk(
 );
 
 export const deleteUserById = createAsyncThunk(
-  "users/deleteUserById",
+  "users/delete",
   async (id, { rejectWithValue }) => {
     try {
       await userService.deleteUser(id);
@@ -47,7 +47,7 @@ export const deleteUserById = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(getErrorMessage(error));
     }
-  },
+  }
 );
 
 export const setUserStatusById = createAsyncThunk(
@@ -124,8 +124,21 @@ const usersSlice = createSlice({
         state.selectedUser = action.payload;
         state.items = state.items.map((user) => (user.id === action.payload.id ? action.payload : user));
       })
+      .addCase(deleteUserById.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(deleteUserById.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.items = state.items.filter((user) => user.id !== action.payload);
+        if (state.selectedUser?.id === action.payload) {
+          state.selectedUser = null;
+          state.selectedStatus = "idle";
+        }
+      })
+      .addCase(deleteUserById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = normalizeRejectedError(action.payload) || action.error.message || "Something went wrong.";
       })
       .addCase(setUserStatusById.fulfilled, (state, action) => {
         state.selectedUser = action.payload;

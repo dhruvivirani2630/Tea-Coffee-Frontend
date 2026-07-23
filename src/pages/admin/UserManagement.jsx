@@ -27,7 +27,7 @@ const UserManagement = () => {
       dispatch(fetchUsers());
     }
   }, [dispatch, users.length]);
-
+console.log("Users:", users);
   const filteredUsers = users.filter((user) => {
     const term = search.trim().toLowerCase();
     const matchesSearch =

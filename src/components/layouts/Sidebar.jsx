@@ -15,11 +15,12 @@ const Sidebar = () => {
               Admin Dashboard
             </NavLink>
             <NavLink to="/admin/users">User Management</NavLink>
+            <NavLink to="/admin/orders">Orders</NavLink>
           </>
         ) : (
-          <NavLink to="/dashboard" end>
-            Dashboard
-          </NavLink>
+          <><NavLink to="/dashboard" end>
+              Dashboard
+            </NavLink><NavLink to="/orders">Orders</NavLink></>
         )}
       </nav>
     </aside>

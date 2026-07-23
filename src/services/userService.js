@@ -320,7 +320,20 @@ export const userService = {
   },
 
   async deleteUser(id) {
-    await axiosClient.delete(`${USERS_ENDPOINT}/${id}`);
+    if (!useMockApi) {
+      try {
+        const response = await axiosClient.delete(`users/delete/${id}`);
+        const data = response.data?.data || response.data || {};
+        if (data?.success === false) {
+          throw { message: data.message || "Unable to delete user." };
+        }
+        clearUsersCache();
+        return { success: true, data };
+      } catch (error) {
+        throw getApiError(error, "Unable to delete user.");
+      }
+    }
+
     const users = getUsersFromStorage();
     const user = users.find((item) => item.id === id);
     if (!user) throw { message: "User not found." };
