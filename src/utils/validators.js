@@ -15,17 +15,17 @@ const validateContactFields = (values, errors) => {
   const phone = values.phone?.trim() || "";
 
   if (!email && !phone) {
-    errors.email = "Provide an email address or phone number.";
-    errors.phone = "Provide an email address or phone number.";
+    errors.email = "Email or phone number is required";
+    errors.phone = "Email or phone number is required";
     return;
   }
 
   if (email && !validateEmail(email)) {
-    errors.email = "Enter a valid email address.";
+    errors.email = "Enter a valid email address";
   }
 
   if (phone && !validatePhone(phone)) {
-    errors.phone = "Enter a valid 10-digit phone number.";
+    errors.phone = "Enter a valid phone number";
   }
 };
 
@@ -34,9 +34,9 @@ export const validateProfileFields = (values, users = [], currentUserId = null) 
   const fullName = values.fullName?.trim();
   const employeeId = values.employeeId?.trim();
 
-  if (!fullName) errors.fullName = "Full name is required.";
+  if (!fullName) errors.fullName = "Full name is required";
   if (!employeeId) {
-    errors.employeeId = "Employee ID is required.";
+    errors.employeeId = "Employee ID is required";
   } else if (
     users.some(
       (user) =>
@@ -44,7 +44,7 @@ export const validateProfileFields = (values, users = [], currentUserId = null) 
         user.id !== currentUserId,
     )
   ) {
-    errors.employeeId = "Employee ID must be unique.";
+    errors.employeeId = "Employee ID already exists";
   }
 
   validateContactFields(values, errors);
@@ -53,9 +53,10 @@ export const validateProfileFields = (values, users = [], currentUserId = null) 
 
 export const validateAuth = (values, users = []) => {
   const errors = validateProfileFields(values, users);
-  if (!validatePassword(values.password || "")) {
-    errors.password =
-      "Password needs 8+ chars with uppercase, lowercase, number, and special character.";
+  if (!values.password) {
+    errors.password = "Password is required";
+  } else if (!validatePassword(values.password)) {
+    errors.password = "Password needs 8+ chars with uppercase, lowercase, number, and special character";
   }
   return errors;
 };
@@ -63,12 +64,14 @@ export const validateAuth = (values, users = []) => {
 export const validateLogin = (values) => {
   const errors = {};
 
-  if (!isEmailOrPhone(values.identifier || "")) {
-    errors.identifier = "Enter a valid email address or phone number.";
+  if (!values.identifier?.trim()) {
+    errors.identifier = "Email or phone number is required";
+  } else if (!isEmailOrPhone(values.identifier)) {
+    errors.identifier = "Enter a valid email address or phone number";
   }
 
   if (!values.password) {
-    errors.password = "Password is required.";
+    errors.password = "Password is required";
   }
 
   return errors;

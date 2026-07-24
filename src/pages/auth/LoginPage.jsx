@@ -4,6 +4,7 @@ import AuthForm from "../../components/forms/AuthForm";
 import { ROLES } from "../../constants/roles";
 import { loginUser } from "../../store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { validateLogin } from "../../utils/validators";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -24,16 +25,41 @@ const LoginPage = () => {
     setMessage("");
   };
 
+  const extractErrorMessage = (error) => {
+    // Prefer the API's message over Axios's generic "Request failed" message.
+    if (typeof error === "string") return error;
+    if (error?.response?.data?.message) return error.response.data.message;
+    if (error?.response?.data?.error) return error.response.data.error;
+    if (error?.message) return error.message;
+    return "Unable to login. Please try again.";
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     setMessage("");
+    
+    // Validate form before submitting
+    const validationErrors = validateLogin(values);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     try {
       const result = await dispatch(loginUser(values)).unwrap();
       const fallback = result.user.role === ROLES.ADMIN ? "/admin" : "/dashboard";
       navigate(location.state?.from?.pathname || fallback, { replace: true });
     } catch (err) {
-      setErrors(err?.errors || {});
-      setMessage(err?.message || "Unable to login.");
+      const errorMessage = extractErrorMessage(err);
+      const fieldErrors = err?.response?.data?.errors;
+
+      if (fieldErrors && typeof fieldErrors === "object") {
+        setErrors(fieldErrors);
+      } else if (/invalid password/i.test(errorMessage)) {
+        setErrors({ password: "Invalid password" });
+      } else {
+        setMessage(errorMessage);
+      }
     }
   };
 

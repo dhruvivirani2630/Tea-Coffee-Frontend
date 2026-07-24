@@ -4,6 +4,7 @@ import AuthForm from "../../components/forms/AuthForm";
 import { ROLES } from "../../constants/roles";
 import { signupUser } from "../../store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { validateAuth } from "../../utils/validators";
 
 const initialValues = {
   fullName: "",
@@ -32,6 +33,14 @@ const SignupPage = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setMessage("");
+    
+    // Validate form before submitting
+    const validationErrors = validateAuth(values);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     try {
       await dispatch(signupUser(values)).unwrap();
       navigate("/dashboard", { replace: true });

@@ -44,7 +44,11 @@ axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error?.response?.status;
-    if (status === 401 || status === 403) {
+    const isLoginRequest = error?.config?.url?.replace(/^\/+/, "") === "auth/login";
+
+    // A 401 from the login endpoint is an invalid credential, not an expired session.
+    // Keep the user on the form so its validation message can be shown.
+    if ((status === 401 || status === 403) && !isLoginRequest) {
       clearSession();
       redirectToLogin();
     }
