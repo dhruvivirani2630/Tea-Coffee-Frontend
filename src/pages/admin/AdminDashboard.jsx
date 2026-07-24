@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import Loader from "../../components/common/Loader";
+import OrderStatistics from "../../components/common/OrderStatistics";
 import { ROLES, STATUS } from "../../constants/roles";
 import { fetchUsers } from "../../store/slices/usersSlice";
+import { fetchOrders } from "../../store/slices/ordersSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.items);
   const totalUsers = useAppSelector((state) => state.users.total);
-  const loading = useAppSelector((state) => state.users.status === "loading");
+  const usersLoading = useAppSelector((state) => state.users.status === "loading");
+  const orders = useAppSelector((state) => state.orders.items);
+  const ordersLoading = useAppSelector((state) => state.orders.status === "loading");
 
   useEffect(() => {
     if (!users.length) {
@@ -16,7 +20,13 @@ const AdminDashboard = () => {
     }
   }, [dispatch, users.length]);
 
-  if (loading) return <Loader label="Loading admin dashboard" />;
+  useEffect(() => {
+    if (!orders.length) {
+      dispatch(fetchOrders({ user: null, isAdmin: true }));
+    }
+  }, [dispatch, orders.length]);
+
+  if (usersLoading || ordersLoading) return <Loader label="Loading admin dashboard" />;
 
   const active = users.filter((user) => user.status === STATUS.ACTIVE).length;
   const admins = users.filter((user) => user.role === ROLES.ADMIN).length;
@@ -43,6 +53,8 @@ const AdminDashboard = () => {
           <strong>{admins}</strong>
         </article>
       </div>
+
+      <OrderStatistics orders={orders} title="All Users Tea & Coffee Orders" />
     </section>
   );
 };
