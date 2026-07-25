@@ -16,7 +16,7 @@ test.describe('Login Tests', () => {
     const [loginResponse] = await Promise.all([
       page.waitForResponse(
         response =>
-          response.url().includes('http://localhost:5000/api/auth/login') &&
+          response.url().includes('/api/auth/login') &&
           response.request().method() === 'POST'
       ),
       page.getByRole('button', { name: /login/i }).click(),
@@ -52,7 +52,7 @@ test.describe('Login Tests', () => {
     const [loginResponse] = await Promise.all([
       page.waitForResponse(
         response =>
-          response.url().includes('http://localhost:5000/api/auth/login') &&
+          response.url().includes('/api/auth/login') &&
           response.request().method() === 'POST'
       ),
       page.getByRole('button', { name: /login/i }).click(),
@@ -136,7 +136,7 @@ test.describe('Login Tests', () => {
     const [loginResponse] = await Promise.all([
       page.waitForResponse(
         response =>
-          response.url().includes('http://localhost:5000/api/auth/login') &&
+          response.url().includes('/api/auth/login') &&
           response.request().method() === 'POST'
       ),
       page.getByRole('button', { name: /login/i }).click(),
@@ -164,7 +164,7 @@ test.describe('Login Tests', () => {
     const [loginResponse] = await Promise.all([
       page.waitForResponse(
         response =>
-          response.url().includes('http://localhost:5000/api/auth/login') &&
+          response.url().includes('/api/auth/login') &&
           response.request().method() === 'POST'
       ),
       page.getByRole('button', { name: /login/i }).click(),
@@ -188,7 +188,7 @@ test.describe('Login Tests', () => {
     const [loginResponse] = await Promise.all([
       page.waitForResponse(
         response =>
-          response.url().includes('http://localhost:5000/api/auth/login') &&
+          response.url().includes('/api/auth/login') &&
           response.request().method() === 'POST'
       ),
       page.getByRole('button', { name: /login/i }).click(),
